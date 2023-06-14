@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { Tabs } from 'antd';
+import './App.scss';
+import TopicList from './pageComponents/TopicList.tsx';
 
+const items = [
+  {
+    key: '1',
+    label: `All`,
+    children: <TopicList />,
+  },
+  {
+    key: '2',
+    label: `Custom`,
+    children: `Content of Tab Pane 2`,
+  },
+  {
+    key: '3',
+    label: `ICP`,
+    children: `Content of Tab Pane 3`,
+  },
+  {
+    key: '4',
+    label: `Mission`,
+    children: `Content of Tab Pane 3`,
+  },
+  {
+    key: '5',
+    label: `Product`,
+    children: `Content of Tab Pane 3`,
+  },
+];
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Tabs defaultActiveKey="1" items={items} className='categories_tab' />
     </div>
   );
 }
