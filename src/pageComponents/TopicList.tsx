@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Badge } from "antd";
 import { Card } from "antd";
 import { topicList } from "../constants/data";
@@ -6,23 +6,39 @@ import ContentModal from "../modals/ContentModal.tsx";
 
 export default function TopicList() {
   const [open, setOpen] = useState(false);
-  const [currentHeading, setCurrentHeading] = useState("");
+  const [topicListData, setTopicListData] = useState(
+    JSON.parse(localStorage.getItem("topicList")) || topicList
+  );
+  const [currentTopic, setcurrentTopic] = useState({});
+
+  useEffect(() => {
+    if (!localStorage.getItem("topicList")) {
+      console.log("hii");
+      localStorage.setItem("topicList", JSON.stringify(topicList));
+      setTopicListData(topicList);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(topicListData);
+  }, [topicListData]);
 
   const handleClose = () => {
     setOpen(!open);
   };
+  const updateTopicDetails = (newContent) => {};
   return (
     <div className="product_container">
       <p>Recommended Topics</p>
-      {topicList.all.map((item) => (
+      {topicListData.all.map((item) => (
         <div>
           <Card
             title={item.heading}
             extra={
               <Button
                 onClick={() => {
+                  setcurrentTopic(item);
                   setOpen(true);
-                  setCurrentHeading(item.heading);
                 }}
               >
                 Write
@@ -40,7 +56,11 @@ export default function TopicList() {
         </div>
       ))}
       {open && (
-        <ContentModal handleClose={handleClose} title={currentHeading} />
+        <ContentModal
+          handleClose={handleClose}
+          topic={currentTopic}
+          updateTopicDetails={updateTopicDetails}
+        />
       )}
     </div>
   );
