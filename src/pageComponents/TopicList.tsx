@@ -11,22 +11,22 @@ export default function TopicList() {
   );
   const [currentTopic, setcurrentTopic] = useState({});
 
-  useEffect(() => {
-    if (!localStorage.getItem("topicList")) {
-      console.log("hii");
-      localStorage.setItem("topicList", JSON.stringify(topicList));
-      setTopicListData(topicList);
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log(topicListData);
-  }, [topicListData]);
-
   const handleClose = () => {
     setOpen(!open);
   };
-  const updateTopicDetails = (newContent) => {};
+  const updateTopicDetails = (newContent) => {
+    const topicList = { ...topicListData };
+    topicList.all.find((item) => item.id === currentTopic.id).content =
+      newContent;
+    setTopicListData(topicList);
+    localStorage.setItem("topicList", JSON.stringify(topicList));
+  };
+  useEffect(() => {
+    if (!localStorage.getItem("topicList")) {
+      localStorage.setItem("topicList", JSON.stringify(topicList));
+    }
+  }, []);
+
   return (
     <div className="product_container">
       <p>Recommended Topics</p>
