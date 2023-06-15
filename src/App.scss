@@ -10,6 +10,15 @@
 .content_modal {
     width: 50%  !important;
     .dropdown_container {
-        
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .modal_btn {
+        background: #ff4d4f;
+        color: white;
+        margin-bottom: 10px;
     }
 }

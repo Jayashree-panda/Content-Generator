@@ -22,17 +22,32 @@ export default function ContentModal({
       open
       onCancel={handleClose}
       className="content_modal"
+      footer={
+        <Button
+          className="modal_btn"
+          onClick={() => {
+            updateTopicDetails(editorValue);
+            handleClose();
+          }}
+        >
+          Save
+        </Button>
+      }
     >
       <div className="dropdown_container">
         <div>
-          <b>Select Tone:</b>
+          <b style={{ marginRight: "10px" }}>Select Tone:</b>
           <Select
             defaultValue="Formal"
             style={{ width: 200 }}
             options={toneOptions}
           />
         </div>
-        <Button danger onClick={() => setEditorValue(topic.content)}>
+        <Button
+          onClick={() => setEditorValue(topic.content)}
+          className="modal_btn"
+          style={{ width: "300px" }}
+        >
           Generate
         </Button>
       </div>
@@ -48,14 +63,6 @@ export default function ContentModal({
           setEditorValue(value);
         }}
       />
-      <Button
-        danger
-        onClick={() => {
-          updateTopicDetails(editorValue);
-        }}
-      >
-        Save
-      </Button>
     </Modal>
   );
 }
