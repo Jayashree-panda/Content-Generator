@@ -24,7 +24,8 @@ export default function ContentModal({
       className="content_modal"
       footer={
         <Button
-          className="modal_btn"
+          type="primary"
+          danger
           onClick={() => {
             updateTopicDetails(editorValue);
             handleClose();
@@ -45,8 +46,9 @@ export default function ContentModal({
         </div>
         <Button
           onClick={() => setEditorValue(topic.content)}
-          className="modal_btn"
-          style={{ width: "300px" }}
+          type="primary"
+          danger
+          className="generate_btn"
         >
           Generate
         </Button>
